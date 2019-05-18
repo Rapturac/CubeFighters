@@ -1,0 +1,188 @@
+<html>
+<head>
+<title> 1 </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open(520,520);
+
+var island = new sjs.Image("picks/island.png");
+island.setSize(225,100);
+island.moveTo(150,210);
+island.type = "island"
+
+var player = new sjs.Image("picks/cube1L.png");
+player.type = "player";
+player.friction = .3;
+player.setGravity(4);
+jump = true;
+canShoot = true;
+player.moveTo (200,200);
+f = false;
+
+var player2 = new sjs.Image("picks/cube1f.png")
+player2.type = "player2";
+player2.friction = .3;
+player2.setGravity(4);
+jump2 = true;
+canShoot2 = true;
+player2.moveTo (300,200);
+f2 = false;
+
+
+
+
+
+
+
+
+
+
+
+
+sjs.keyDown(A_KEY, function(x,y){
+player.pushLeft();
+player.setImage("picks/cube1L.png") 
+l = true;
+
+});
+
+sjs.keyDown(D_KEY, function(x,y){
+player.pushRight()
+player.setImage("picks/cube1R.png")
+r = true;
+
+});
+
+sjs.keyDown(W_KEY, function(){
+	if(jump == true){
+		jump = false;
+		player.pushUp(20);}
+
+	});
+sjs.keyDown(E_KEY,function(x,y){
+	if(attack == false){
+		setTimeout(function(){
+			attack = true;
+		},3000);
+	}
+	if(attack == true){
+
+	}
+})
+
+
+
+
+
+
+sjs.onHit("player","island",function(x,y){
+	sjs.stoppedBy(x,y);
+	jump = true;
+});
+
+sjs.onHit("player","Top_Screen",function(x,y){
+	sjs.stoppedBy(x,y);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sjs.keyDown(J_KEY, function(x,y){
+player2.pushLeft(1.5);
+
+l2 = true;
+
+});
+
+sjs.keyDown(L_KEY, function(x,y){
+player2.pushRight(1.5)
+
+r2 = true;
+
+});
+
+sjs.keyDown(I_KEY, function(){
+	if(jump2 == true){
+		jump2 = false;
+		player2.pushUp(23);}
+
+	});
+
+
+
+
+
+sjs.onHit("player2","island",function(x,y){
+	sjs.stoppedBy(x,y);
+	jump2 = true;
+});
+
+
+
+sjs.keyDown(E_KEY,function(x,y){
+	player.setImage("picks/cube1F.png");
+	f = true;
+	setTimeout(function(x,y){
+		if(f == true){
+			f = false;
+		}
+	},2000);
+});
+
+sjs.keyDown(U_KEY,function(x,y){
+	player2.setImage("picks/cube1F.png");
+	f2 = true;
+	setTimeout(function(x,y){
+		if(f2 == true){
+			f2 = false;
+		}
+	},2000);
+});
+
+
+
+sjs.onHit("player","player2",function(x,y){
+sjs.bounceOff(x,y);
+});
+
+sjs.onHit("player2","player",function(x,y){
+sjs.bounceOff(x,y)
+});
+
+
+
+
+
+
+
+}//endstart
+</script>
+</head>
+<body onload="start()">
+<h1> Contact demo- Flare(alpha) </h1>
+
+<div id="target" style="margin:auto;background:lightBlue;"></div>
+</body>
+</html>
